@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<function xmlns="urn:sform.com" >
+<file>get.xml</file>   
+<name>Get</name>
+<sql>GetAll</sql>
+  <visibility>public</visibility>
+<return_type>IList&#60;&#36;table&#36;&#62;</return_type>
+  <default_value>null</default_value>
+<arguments>
+<argument type="ITransactionManager" object="tm"/>
+</arguments>
+
+
+<content>
+			IList&#60;&#36;table&#36;&#62; list = null;
+
+			IQueryExecutor&#60;&#36;table&#36;&#62; queryExecutor = new QueryExecutor&#60;&#36;table&#36;&#62;(tm);
+
+			queryExecutor.CreateSqlCommand(@"&#36;sql&#36;");
+
+			ISafeDataReader dataReader = queryExecutor.ExecuteReader();
+
+			try
+			{
+				&#36;table&#36; item = null;
+
+				while (dataReader.Read())
+				{
+					if (list == null)
+					{
+						list = new List&#60;&#36;table&#36;&#62;();
+					}
+
+					item = new &#36;table&#36;();
+
+					&#36;assignments&#36;
+
+					list.Add(item);
+				}
+
+				dataReader.Close();
+			}
+			catch
+			{
+				if (dataReader != null)
+				{
+					dataReader.Close();
+					dataReader = null;
+				}
+
+				throw;
+			}
+
+			return list;
+</content>
+</function>

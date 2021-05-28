@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data.SqlClient;
+using Simple.Framework;
+using System.Data;
+using $namespace$.POCO;
+using $namespace$.DAO;
+
+namespace $namespace$.BLL
+{
+    public class $table$BLL //: IDisposable
+    {
+        private $table$DAO _$lowercase_table$DAO;
+
+        public $table$BLL()
+        {
+            _$lowercase_table$DAO = new $table$DAO();
+        }
+
+        $functions$  
+
+        #region IDisposable
+		/*
+        private bool disposed = false; // to detect redundant calls
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    if (_$lowercase_table$DAO != null)
+                    {
+                        _$lowercase_table$DAO.Dispose();
+                    }
+                }
+
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }*/
+        #endregion
+    }
+}

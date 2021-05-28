@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<function xmlns="urn:sform.com" >
+<file>get_dataset.xml</file>
+<name>GetDataSet</name>
+<sql>GetAll</sql>
+  <visibility>public</visibility>
+<return_type>DataSet</return_type>
+  <default_value>null</default_value>
+<arguments>
+<argument type="ITransactionManager" object="tm"/>
+</arguments>
+
+<content>
+			IQueryExecutor&#60;&#36;table&#36;&#62; queryExecutor = new QueryExecutor&#60;&#36;table&#36;&#62;(tm);
+
+			queryExecutor.CreateSqlCommand(@"&#36;sql&#36;");
+
+			return queryExecutor.ExecuteDataSet();
+</content>
+</function>

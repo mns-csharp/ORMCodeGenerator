@@ -1,0 +1,102 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using Simple.Framework;
+using $namespace$.POCO;
+using $namespace$.BLL;
+using $namespace$.Validation;
+
+namespace $namespace$.GUI
+{
+    public partial class $table$EntityForm : BaseForm
+    {
+        private $table$BLL $lowercase_table$Bll = null;
+        private FormViewMode formViewMode = FormViewMode.Nothing;
+        private $table$ $lowercase_table$ = null;
+
+        public $table$EntityForm(FormViewMode formViewMode, $table$ $lowercase_table$)
+        {
+            InitializeComponent();
+
+            $lowercase_table$Bll = new $table$BLL();
+            this.formViewMode = formViewMode;
+            this.$lowercase_table$ = $lowercase_table$;
+
+            if (formViewMode == FormViewMode.Edit)
+            {
+                MapObjectToControls();
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                $table$ item = null;
+
+                if (formViewMode == FormViewMode.Add)
+                {
+                    item = new $table$();
+                }
+                else if (formViewMode == FormViewMode.Edit)
+                {
+                    item = $lowercase_table$;
+                }
+
+                $controls_to_object$
+                                
+                $table$Validator.Validate(item);
+
+                if (item.ID == null)
+                {
+                    $lowercase_table$Bll.Save(item);
+                }
+                else
+                {
+                    $lowercase_table$Bll.Update(item);
+                }
+
+                OnItemStateChanged();
+
+                if (formViewMode == FormViewMode.Add)
+                {
+                    ClearControls();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void MapObjectToControls()
+        {
+            if ($lowercase_table$ != null)
+            {
+                $object_to_controls$
+            }
+        }
+
+        private void ClearControls()
+        {
+            $clear_controls$
+        }
+
+        private void btnSelectPhoto_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+
+            string selectedFileName = openFileDialog1.FileName;
+            photoPictureBox.ImageLocation = selectedFileName;
+        }
+    }
+}

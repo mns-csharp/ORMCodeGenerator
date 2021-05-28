@@ -1,0 +1,240 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data.SqlClient;
+using Simple.Framework;
+using System.Data;
+
+namespace $namespace$
+{
+    public class $table$BLL : IDisposable
+    {
+        private $table$DAO _$lowercase_table$DAO;
+
+        public $table$BLL()
+        {
+            _$lowercase_table$DAO = new $table$DAO();
+        }
+
+        public $table$ Get(int id)
+        {
+            $table$ item = null;
+
+            TransactionManager tm = new TransactionManager(DBNameConst.MSAccessStringName);
+
+            try
+            {
+                tm.BeginTransaction();
+
+                item = _$lowercase_table$DAO.Get(tm, id);
+
+                tm.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                tm.RollbackTransaction();
+
+                throw;
+            }
+
+            return item;
+        }
+
+        public IList<$table$> Get()
+        {
+            IList<$table$> list = null;
+
+            TransactionManager tm = new TransactionManager(DBNameConst.MSAccessStringName);
+
+            try
+            {
+                tm.BeginTransaction();
+
+                list = _$lowercase_table$DAO.Get(tm);
+
+                tm.CommitTransaction();
+            }
+            catch (Exception ex)
+            {
+                tm.RollbackTransaction();
+
+                throw ex;
+            }
+
+            return list;
+        }
+
+        public DataSet GetDataSet()
+        {
+            DataSet list = null;
+
+            TransactionManager tm = new TransactionManager(DBNameConst.MSAccessStringName);
+
+            try
+            {
+                tm.BeginTransaction();
+
+                list = _$lowercase_table$DAO.GetDataSet(tm);
+
+                tm.CommitTransaction();
+            }
+            catch (Exception ex)
+            {
+                tm.RollbackTransaction();
+
+                throw ex;
+            }
+
+            return list;
+        }
+
+        public IDictionary<int, $table$> GetDictionary()
+        {
+            IDictionary<int, $table$> list = null;
+
+            TransactionManager tm = new TransactionManager(DBNameConst.MSAccessStringName);
+
+            try
+            {
+                tm.BeginTransaction();
+
+                list = _$lowercase_table$DAO.GetDictionary(tm);
+
+                tm.CommitTransaction();
+            }
+            catch (Exception ex)
+            {
+                tm.RollbackTransaction();
+
+                throw ex;
+            }
+
+            return list;
+        }
+
+        public int Save($table$ item)
+        {
+            int newId = 0;
+
+            TransactionManager tm = new TransactionManager(DBNameConst.MSAccessStringName);
+
+            try
+            {
+                tm.BeginTransaction();
+
+                item.ID = newId = PivotTable.GetNextID(tm, "$table$").Value;
+
+                _$lowercase_table$DAO.Save(tm, item);
+
+                PivotTable.UpdateNextIdField(tm, "$table$", newId);
+
+                tm.CommitTransaction();
+            }
+            catch (Exception ex)
+            {
+                tm.RollbackTransaction();
+
+                throw ex;
+            }
+
+            return newId;
+        }
+
+        public int Update($table$ item)
+        {
+            int count = 0;
+
+            TransactionManager tm = new TransactionManager(DBNameConst.MSAccessStringName);
+
+            try
+            {
+                tm.BeginTransaction();
+
+                count = _$lowercase_table$DAO.Update(tm, item);
+
+                tm.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                tm.RollbackTransaction();
+
+                throw;
+            }
+
+            return count;
+        }
+
+        public int Update(List<$table$> items)
+        {
+            int count = 0;
+
+            TransactionManager tm = new TransactionManager(DBNameConst.MSAccessStringName);
+
+            try
+            {
+                tm.BeginTransaction();
+
+                count = _$lowercase_table$DAO.Update(tm, items);
+
+                tm.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                tm.RollbackTransaction();
+
+                throw;
+            }
+
+            return count;
+        }
+
+        public int Delete($table$ item)
+        {
+            int count = 0;
+
+            TransactionManager tm = new TransactionManager(DBNameConst.MSAccessStringName);
+
+            try
+            {
+                tm.BeginTransaction();
+
+                _$lowercase_table$DAO.Delete(tm, item);
+
+                tm.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                tm.RollbackTransaction();
+
+                throw;
+            }
+
+            return count;
+        }
+
+        #region IDisposable
+        private bool disposed = false; // to detect redundant calls
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    if (_$lowercase_table$DAO != null)
+                    {
+                        _$lowercase_table$DAO.Dispose();
+                    }
+                }
+
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
+    }
+}

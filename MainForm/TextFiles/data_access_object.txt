@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using Simple.Framework;
+using System.Data.SqlTypes;
+using $namespace$.POCO;
+
+namespace $namespace$.DAO
+{
+    public class $table$DAO
+    {
+$functions$        
+    }
+}

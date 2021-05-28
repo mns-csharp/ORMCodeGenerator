@@ -1,0 +1,25 @@
+﻿		
+		
+		public $return_type$ $function_name$($parameters$)
+        {
+            $return_type$ ret = $default_value$;
+
+            TransactionManager tm = new TransactionManager(DBNameConst.ConnectionStringName);
+
+            try
+            {
+                tm.BeginTransaction();
+
+                ret = _$lowercase_table$DAO.$function_name$(tm, $arguments$);
+
+                tm.CommitTransaction();
+            }
+            catch
+            {
+                tm.RollbackTransaction();
+
+                throw;
+            }
+
+            return ret;
+        }

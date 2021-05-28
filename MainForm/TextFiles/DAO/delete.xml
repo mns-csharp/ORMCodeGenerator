@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<function xmlns="urn:sform.com" >
+<file>delete.xml</file>
+<name>Delete</name>
+<arguments>
+<argument type="ITransactionManager" object="tm"/>
+<argument type="&#36;table&#36;" object="item"/>
+</arguments>
+  <visibility>public</visibility>
+<return_type>int</return_type>
+  <default_value>-99</default_value>
+  <sql>DeleteByID</sql>
+<content>
+			int count = -1;
+
+			try
+			{
+				IQueryExecutor&#60;&#36;table&#36;&#62; queryExecutor = new QueryExecutor&#60;&#36;table&#36;&#62;(tm);
+
+				queryExecutor.CreateSqlCommand(@"&#36;sql&#36;");
+
+				&#36;primary_key&#36;
+
+				count = queryExecutor.ExecuteNonQuery();
+			}
+			catch
+			{
+				throw;
+			}
+
+			return count;
+</content>
+</function>
